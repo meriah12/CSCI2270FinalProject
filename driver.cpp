@@ -21,18 +21,34 @@ int main(){
       case 1:{
         string title;
         cout << endl << "BOOK CHECK OUT" << endl;
-        cout << "Book Title: ";
+        cout << "Enter Book Title: ";
         getline (cin, title);
+        cout << endl;
+
+        //SEARCH FOR THE TITLE OF THE BOOK
+        //IF BOOK IS FOUND, CALL THE CHECK OUT BOOK FUNCTION
+        //IF THE BOOK IS NOT FOUND, PRINT AN ERROR MESSAGE AND RETURN TO MAIN MENU
 
       }
       break;
 
-      case 2:
+      case 2:{
+        string title;
+        cout << endl << "BOOK CHECK IN" << endl;
+        cout << "Enter Book Title: ";
+        getline(cin, title);
+        cout << endl;
 
+        //SEARCH FOR THE TITLE OF THE BOOK
+        //IF BOOK IS FOUND, CALL THE RETURN BOOK FUNCTION
+        //IF THE BOOK IS NOT FOUND, PRINT AN ERROR MESSAGE AND RETURN TO MAIN MENU
+
+
+      }
       break;
 
       case 3:
-
+        
       break;
 
       case 4:
