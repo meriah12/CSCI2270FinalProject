@@ -1,6 +1,7 @@
 #include <iostream>
 #include <string>
 using namespace std;
+#include "library.cpp"
 
 int main(){
   bool control = true;
