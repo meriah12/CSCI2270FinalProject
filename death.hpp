@@ -23,7 +23,9 @@ class Library{
     ~Library(); //destructor
     void checkOut(string title); //check out a book and set its bool to true
     void checkIn(string title); //check in a book and set its bool to false
+    bookNode* createBook(string title);
     void addBook(bookNode* node); //add a book to the correct tree node at the correct spot in the hash table
+    void deleteBook(string title);
     bool search(string title); //search for a book in the tree then hash table
 
   private:
