@@ -47,16 +47,31 @@ int main(){
       }
       break;
 
-      case 3:
-        
+      case 3:{
+        string title;
+        cout << endl << "BOOK SEARCH" << endl;
+        cout << "Enter Book Title to Search: ";
+        getline(cin, title);
+        cout << endl;
+
+      }
       break;
 
-      case 4:
-
+      case 4:{
+        string inPassword;
+        cout << endl << "Enter Staff Password: ";
+        getline(cin, inPassword);
+        if(inPassword == "ABCD"){
+          //CALL A STAFF MENU FUNCTION WHICH HOLDS ALL OF THE OTHER FUNCTIONS THAT ARE NOT INCLUDED IN MAIN MENU
+        }
+        else{
+          cout << endl << "Password Incorrect" << endl << endl;
+        }
+      }
       break;
 
       case 5:
-        cout << "Exiting Program" << endl;
+        cout << endl <<"Exiting Program" << endl;
         control = false;
       break;
 
