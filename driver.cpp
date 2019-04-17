@@ -1,7 +1,8 @@
 #include <iostream>
 #include <string>
 using namespace std;
-#include "library.cpp"
+//#include "library.cpp"
+#include "death.hpp"
 
 void staffMenu(){
   bool sControl = true;
@@ -49,7 +50,7 @@ void staffMenu(){
 
 int main(){
   bool control = true;
-  Library l;
+  Library l(100);
 
   //While loop allows for continuous interaction with the program until the user decides to leave
   while(control == true){
@@ -74,7 +75,13 @@ int main(){
         cout << "Enter Book Title: ";
         getline (cin, title);
         cout << endl;
-        
+        /*
+        if(l.search(title))
+          l.checkOut(title);
+        else
+          cout << "Book not found in the database. Cannot check out." << endl;
+        */
+
         //SEARCH FOR THE TITLE OF THE BOOK
         //IF BOOK IS FOUND, CALL THE CHECK OUT BOOK FUNCTION
         //IF THE BOOK IS NOT FOUND, PRINT AN ERROR MESSAGE AND RETURN TO MAIN MENU
@@ -90,6 +97,13 @@ int main(){
         cout << "Enter Book Title: ";
         getline(cin, title);
         cout << endl;
+        /*
+        if(l.search(title))
+          l.checkIn(title);
+        else
+          cout << "Book not found in the database. Cannot return" << endl;
+        */
+
         //SEARCH FOR THE TITLE OF THE BOOK
         //IF BOOK IS FOUND, CALL THE RETURN BOOK FUNCTION
         //IF THE BOOK IS NOT FOUND, PRINT AN ERROR MESSAGE AND RETURN TO MAIN MENU
@@ -99,14 +113,19 @@ int main(){
       break;
 
       //Search Option
-      //This option allows a user to search the library database for a book
+      //This option allows a user to search the library database for a book and see if it exists
       case 3:{
         string title;
         cout << endl << "BOOK SEARCH" << endl;
         cout << "Enter Book Title to Search: ";
         getline(cin, title);
         cout << endl;
-
+        /*
+        if(l.search(title))
+          cout << title << " exists in the database." << endl;
+        else
+          cout << title << " does not exist in the database"
+        */
         //Call the search function, if the book is not found, display that the book does not exist in the library
         //If the book is found, display the information of the book and whether it is checked out or not
 
