@@ -49,6 +49,7 @@ void staffMenu(){
 
 int main(){
   bool control = true;
+  Library l;
 
   //While loop allows for continuous interaction with the program until the user decides to leave
   while(control == true){
@@ -73,7 +74,7 @@ int main(){
         cout << "Enter Book Title: ";
         getline (cin, title);
         cout << endl;
-
+        
         //SEARCH FOR THE TITLE OF THE BOOK
         //IF BOOK IS FOUND, CALL THE CHECK OUT BOOK FUNCTION
         //IF THE BOOK IS NOT FOUND, PRINT AN ERROR MESSAGE AND RETURN TO MAIN MENU
@@ -89,7 +90,6 @@ int main(){
         cout << "Enter Book Title: ";
         getline(cin, title);
         cout << endl;
-
         //SEARCH FOR THE TITLE OF THE BOOK
         //IF BOOK IS FOUND, CALL THE RETURN BOOK FUNCTION
         //IF THE BOOK IS NOT FOUND, PRINT AN ERROR MESSAGE AND RETURN TO MAIN MENU
