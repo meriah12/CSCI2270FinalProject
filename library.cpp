@@ -7,19 +7,11 @@ using namespace std;
 Library::Library(int hashTableSize){
   this->hashTableSize=hashTableSize;
 }
+
 Library::~Library(){
-  //deletes a single hash table
-  for (int i=0; i<hashTableSize; i++){
-    bookNode* head = hashTable[i];
-    while(head!=nullptr){
-      bookNode *current = head->next;
-      head->next = nullptr;
-      delete head;
-      head = current;
-    }
-  }
-  delete[] hashTable;
+
 }
+
 treeNode* Library::createTreeNode(char titleChar){
   treeNode* t = new treeNode;
   t->titleChar=titleChar;
@@ -41,7 +33,7 @@ bookNode* Library::createBook(string title){
 
 void Library::addBook(string title){
   char titleChar = title[0];
-  treeNode* foundTreeNode = searchTree(titleChar);
+  treeNode* foundTreeNode = searchTree(root,titleChar);
   if(foundTreeNode!=nullptr){
     foundTreeNode->numBooks++;
     unsigned int index = hash(title);
@@ -51,49 +43,35 @@ void Library::addBook(string title){
       foundTreeNode->hashTable[index]=n;
     }
     else{ //if index is not empty
-      n->next=hashTable[index];
-      hashTable[index]=n;
+      n->next=foundTreeNode->hashTable[index];
+      foundTreeNode->hashTable[index]=n;
     }
   }
   return;
 }
-treeNode* Library::searchTreeHelper(treeNode* curr, char firstChar){
-  //search tree for titleChar and return the treeNode
-  if(curr == NULL) {
-    return NULL;
-  }
 
-  if(curr->titleChar == firstChar){
+treeNode* Library::searchTree(treeNode* curr, char titleChar){
+  if(curr == nullptr) {
+    return nullptr;
+  }
+  if(curr->titleChar == titleChar){
     return curr;
   }
-
-  if(curr->titleChar > firstChar){
-    return searchTreeHelper(curr->leftChild, firstChar);
+  if(curr->titleChar > titleChar){
+    return searchTree(curr->leftChild, titleChar);
   }
-
-  if(curr->titleChar < firstChar){
-    return searchTreeHelper(curr->rightChild, firstChar);
+  if(curr->titleChar < titleChar){
+    return searchTree(curr->rightChild, titleChar);
   }
-}
-
-treeNode* Library::searchTree(char titleChar){
-  treeNode* tree = searchTreeHelper(root, titleChar);
-
-  if(tree != NULL){
-    return tree;
-  }
-  else{
-    cout << "Character not present in the tree" << endl;
-    return 0;
-  }
+  return nullptr;
 }
 
 bookNode* Library::search(string title){
   char titleChar = title[0];
-  treeNode* foundTreeNode = searchTree(titleChar);
+  treeNode* foundTreeNode = searchTree(root,titleChar);
   if(foundTreeNode!=nullptr){//if the tree has a tree node for the title char
     unsigned int index = hash(title);
-    if(foundTreeNode->hashTable[index]==title){
+    if(foundTreeNode->hashTable[index]->title==title){
       return foundTreeNode->hashTable[index];
     }
     else{
@@ -108,7 +86,8 @@ bookNode* Library::search(string title){
   }
   return nullptr;
 }
-void Libary::checkOut(string title){
+
+void Library::checkOut(string title){
   bookNode* found = search(title);
   if(found!=nullptr&&found->checkedOut==false)
     found->checkedOut=true;
@@ -118,6 +97,7 @@ void Libary::checkOut(string title){
     cout<<title<<" can't be checked out because it's not in the inventory."<<endl;
   return;
 }
+
 void Library::checkIn(string title){
   bookNode* found = search(title);
   if(found!=nullptr&&found->checkedOut==true)
@@ -129,13 +109,12 @@ void Library::checkIn(string title){
 }
 
 treeNode* Library::addNodeHelper(treeNode* currNode, char title){
-  treeNode* searched = searchTree(title);
+  treeNode* searched = searchTree(root,title);
   if(searched->titleChar == title){
     return searched;
   }
   else{
-
-    if(currNode == NULL){
+    if(currNode == nullptr){
       return createTreeNode(title);
     }
     else if(currNode->titleChar < title){
@@ -145,8 +124,9 @@ treeNode* Library::addNodeHelper(treeNode* currNode, char title){
       currNode->leftChild = addNodeHelper(currNode->leftChild, title);
     }
   }
+  return nullptr;
 }
 
-treeNode* Library::addNode(string treeTitle){
-  addNodeHelper(root, treeTitle[0]);
+treeNode* Library::addNode(string title){
+  return addNodeHelper(root, title[0]);
 }
