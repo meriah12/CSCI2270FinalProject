@@ -29,6 +29,16 @@ bookNode* Library::createBook(string title){
   return n;
 }
 
+unsigned int Library::hash(string title){
+  unsigned int hashValue = 5381 ;
+  int length = title.length();
+  for(int i=0;i<length;i++){
+    hashValue=((hashValue<< 5)+hashValue) + title[i];
+  }
+  hashValue %= hashTableSize;
+  return hashValue;
+}
+
 void Library::addBook(string title){
   char titleChar = title[0];
   treeNode* foundTreeNode = searchTree(titleChar);
