@@ -37,18 +37,17 @@ bookNode* Library::createBook(string title){
   return n;
 }
 
-void Library::addBook(string title,bookNode* hashTable[]){
-
-
-  //add a book to the hash table
+void Library::addBook(string title){
+  char titleChar = title[0];
+  treeNode* foundTreeNode = searchTree(titleChar);
   numItems++;
   unsigned int index = hash(title);
   bookNode* n = createBook(title);
-  if(hashTable[index]==nullptr){
+  if(foundTreeNode->hashTable[index]==nullptr){ //if index is empty
     n->next=nullptr;
-    hashTable[index]=n;
+    foundTreeNode->hashTable[index]=n;
   }
-  else{
+  else{ //if index is not empty
     n->next=hashTable[index];
     hashTable[index]=n;
   }
@@ -76,4 +75,23 @@ bookNode* Library::search(string title){
     }
   }
   return nullptr;
+}
+void Libary::checkOut(string title){
+  bookNode* found = search(title);
+  if(found!=nullptr&&found->checkedOut==false)
+    found->checkedOut=true;
+  else if(found!=nullptr&&found->checkedOut==true)
+    cout<<title<<" already checked out."<<endl;
+  else
+    cout<<title<<" can't be checked out because it's not in the inventory."<<endl;
+  return;
+}
+void Library::checkIn(string title){
+  bookNode* found = search(title);
+  if(found!=nullptr&&found->checkedOut==true)
+    found->checkedOut=false;
+  else if(found!=nullptr&&found->checkedOut==false)
+    cout<<title<<" has not been checked out."<<endl;
+  else
+    cout<<title<<" can't be checked in because it's not in the inventory."
 }
