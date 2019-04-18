@@ -5,18 +5,10 @@ using namespace std;
 #include "death.hpp"
 
 Library::Library(int hashTableSize){
-
-  //initilizes a hash table
-  numBooks=0;
-  this->hashTaleSize=hashTableSize;
-  hashTable = new bookNode*[hashTableSize];
-  for(int i=0;i<hashTableSize;i++){
-    hashTable[i]=nullptr;
-  }
+  this->hashTableSize=hashTableSize;
 }
 Library::~Library(){
-
-  //deletes a hash table
+  //deletes a single hash table
   for (int i=0; i<hashTableSize; i++){
     bookNode* head = hashTable[i];
     while(head!=nullptr){
@@ -28,6 +20,16 @@ Library::~Library(){
   }
   delete[] hashTable;
 }
+treeNode* Library::createTreeNode(char titleChar){
+  treeNode* t = new treeNode;
+  t->titleChar=titleChar;
+  t->numBooks=0;
+  t->hashTable=new bookNode*[hashTableSize];
+  for(int i=0;i<hashTableSize;i++){
+    t->hashTable[i] = nullptr;
+  }
+  return t;
+}
 
 bookNode* Library::createBook(string title){
   bookNode* n = new bookNode;
@@ -37,20 +39,21 @@ bookNode* Library::createBook(string title){
   return n;
 }
 
-void Library::addBook(string title,bookNode* hashTable[]){
-
-
-  //add a book to the hash table
-  numItems++;
-  unsigned int index = hash(title);
-  bookNode* n = createBook(title);
-  if(hashTable[index]==nullptr){
-    n->next=nullptr;
-    hashTable[index]=n;
-  }
-  else{
-    n->next=hashTable[index];
-    hashTable[index]=n;
+void Library::addBook(string title){
+  char titleChar = title[0];
+  treeNode* foundTreeNode = searchTree(titleChar);
+  if(foundTreeNode!=nullptr){
+    foundTreeNode->numBooks++;
+    unsigned int index = hash(title);
+    bookNode* n = createBook(title);
+    if(foundTreeNode->hashTable[index]==nullptr){ //if index is empty
+      n->next=nullptr;
+      foundTreeNode->hashTable[index]=n;
+    }
+    else{ //if index is not empty
+      n->next=hashTable[index];
+      hashTable[index]=n;
+    }
   }
   return;
 }
@@ -76,4 +79,23 @@ bookNode* Library::search(string title){
     }
   }
   return nullptr;
+}
+void Libary::checkOut(string title){
+  bookNode* found = search(title);
+  if(found!=nullptr&&found->checkedOut==false)
+    found->checkedOut=true;
+  else if(found!=nullptr&&found->checkedOut==true)
+    cout<<title<<" already checked out."<<endl;
+  else
+    cout<<title<<" can't be checked out because it's not in the inventory."<<endl;
+  return;
+}
+void Library::checkIn(string title){
+  bookNode* found = search(title);
+  if(found!=nullptr&&found->checkedOut==true)
+    found->checkedOut=false;
+  else if(found!=nullptr&&found->checkedOut==false)
+    cout<<title<<" has not been checked out."<<endl;
+  else
+    cout<<title<<" can't be checked in because it's not in the inventory."
 }
