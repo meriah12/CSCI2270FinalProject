@@ -5,13 +5,9 @@ using namespace std;
 #include "death.hpp"
 
 Library::Library(int hashTableSize){
+  this->hashTableSize=hashTableSize;
 
-  //initilizes a hash table
-  numBooks=0;
-  this->hashTaleSize=hashTableSize;
-  hashTable = new bookNode*[hashTableSize];
-  for(int i=0;i<hashTableSize;i++){
-    hashTable[i]=nullptr;
+
   }
 }
 Library::~Library(){
@@ -28,6 +24,16 @@ Library::~Library(){
   }
   delete[] hashTable;
 }
+treeNode* Library::createTreeNode(char titleChar){
+  treeNode* t = new treeNode;
+  t->titleChar=titleChar;
+  t->numBooks=0;
+  t->hashTable=new bookNode*[hashTableSize];
+  for(int i=0;i<hashTableSize;i++){
+    t->hashTable[i] = nullptr;
+  }
+  return t;
+}
 
 bookNode* Library::createBook(string title){
   bookNode* n = new bookNode;
@@ -40,16 +46,18 @@ bookNode* Library::createBook(string title){
 void Library::addBook(string title){
   char titleChar = title[0];
   treeNode* foundTreeNode = searchTree(titleChar);
-  numItems++;
-  unsigned int index = hash(title);
-  bookNode* n = createBook(title);
-  if(foundTreeNode->hashTable[index]==nullptr){ //if index is empty
-    n->next=nullptr;
-    foundTreeNode->hashTable[index]=n;
-  }
-  else{ //if index is not empty
-    n->next=hashTable[index];
-    hashTable[index]=n;
+  if(foundTreeNode!=nullptr){
+    foundTreeNode->numBooks++;
+    unsigned int index = hash(title);
+    bookNode* n = createBook(title);
+    if(foundTreeNode->hashTable[index]==nullptr){ //if index is empty
+      n->next=nullptr;
+      foundTreeNode->hashTable[index]=n;
+    }
+    else{ //if index is not empty
+      n->next=hashTable[index];
+      hashTable[index]=n;
+    }
   }
   return;
 }

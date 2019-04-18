@@ -15,6 +15,7 @@ struct treeNode{ //define node at each spot in the tree with titleChar and point
   treeNode* rightChild = nullptr;
   treeNode* leftChild = nullptr;
   treeNode* parent = nullptr;
+  int numBooks;
   bookNode* hashTable; //pointer to a hashTable
 };
 class Library{
@@ -32,8 +33,6 @@ class Library{
     unsigned int hash(string title); //returns hash value
     treeNode* searchTree(char titleChar); //recursive search tree helper
     treeNode* root; //private root variable
-    bookNode** hashTable; //private hashTable array variable
     int hashTableSize; //private hashtablesize variable
-    int numBooks; //hashTable size (for each tree node)
 };
 #endif
