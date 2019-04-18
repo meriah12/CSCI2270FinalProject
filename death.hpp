@@ -13,9 +13,9 @@ struct bookNode{ //define node for each spot in hash table
 struct treeNode{ //define node at each spot in the tree with titleChar and pointer to hashTable
   string treeTitle;
   char titleChar; //first letter of book title
-  treeNode* rightChild = nullptr;
-  treeNode* leftChild = nullptr;
-  treeNode* parent = nullptr;
+  treeNode* rightChild;
+  treeNode* leftChild;
+  treeNode* parent;
   int numBooks;
   bookNode** hashTable; //pointer to a hashTable
 };
