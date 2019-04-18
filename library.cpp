@@ -6,12 +6,8 @@ using namespace std;
 
 Library::Library(int hashTableSize){
   this->hashTableSize=hashTableSize;
-
-
-  }
 }
 Library::~Library(){
-
   //deletes a single hash table
   for (int i=0; i<hashTableSize; i++){
     bookNode* head = hashTable[i];
