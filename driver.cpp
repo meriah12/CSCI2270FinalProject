@@ -1,7 +1,7 @@
 #include <iostream>
 #include <string>
 using namespace std;
-#include "death.hpp"
+#include "library.cpp"
 
 
 int main(){

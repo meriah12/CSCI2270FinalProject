@@ -1,6 +1,0 @@
-Undefined symbols for architecture x86_64:
-  "Library::hash(std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >)", referenced from:
-      Library::addBook(std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >) in driver-868fa4.o
-      Library::search(std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >) in driver-868fa4.o
-ld: symbol(s) not found for architecture x86_64
-clang: error: linker command failed with exit code 1 (use -v to see invocation)

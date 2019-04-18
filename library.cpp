@@ -131,7 +131,7 @@ treeNode* Library::addNodeHelper(treeNode* currNode, char title){
   return nullptr;
 }
 
-unsigned int hash(string title,int hashTableSize){
+unsigned int Library::hash(string title,int hashTableSize){
   unsigned int hashValue = 5381 ;
   int length = title.length();
   for(int i=0;i<length;i++){
