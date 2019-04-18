@@ -57,9 +57,37 @@ void Library::addBook(string title){
   }
   return;
 }
-treeNode* Library::searchTree(char titleChar){
+treeNode* Library::searchTreeHelper(treeNode* curr, char firstChar){
   //search tree for titleChar and return the treeNode
+  if(curr == NULL) {
+    return NULL;
+  }
+
+  if(curr->titleChar == firstChar){
+    return curr;
+  }
+
+  if(curr->titleChar > firstChar){
+    return searchTreeHelper(curr->leftChild, firstChar);
+  }
+
+  if(curr->titleChar < firstChar){
+    return searchTreeHelper(curr->rightChild, firstChar);
+  }
 }
+
+treeNode* Library::searchTree(char titleChar){
+  treeNode* tree = searchTreeHelper(root, titleChar);
+
+  if(tree != NULL){
+    return tree;
+  }
+  else{
+    cout << "Character not present in the tree" << endl;
+    return 0;
+  }
+}
+
 bookNode* Library::search(string title){
   char titleChar = title[0];
   treeNode* foundTreeNode = searchTree(titleChar);
@@ -97,5 +125,28 @@ void Library::checkIn(string title){
   else if(found!=nullptr&&found->checkedOut==false)
     cout<<title<<" has not been checked out."<<endl;
   else
-    cout<<title<<" can't be checked in because it's not in the inventory."
+    cout<<title<<" can't be checked in because it's not in the inventory.";
+}
+
+treeNode* Library::addNodeHelper(treeNode* currNode, char title){
+  treeNode* searched = searchTree(title);
+  if(searched->titleChar == title){
+    return searched;
+  }
+  else{
+
+    if(currNode == NULL){
+      return createTreeNode(title);
+    }
+    else if(currNode->titleChar < title){
+      currNode->rightChild = addNodeHelper(currNode->rightChild, title);
+    }
+    else if(currNode->titleChar > title){
+      currNode->leftChild = addNodeHelper(currNode->leftChild, title);
+    }
+  }
+}
+
+treeNode* Library::addNode(string treeTitle){
+  addNodeHelper(root, treeTitle[0]);
 }

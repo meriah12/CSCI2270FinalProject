@@ -11,6 +11,7 @@ struct bookNode{ //define node for each spot in hash table
   bookNode* next; //pointer to next node for open addressing
 };
 struct treeNode{ //define node at each spot in the tree with titleChar and pointer to hashTable
+  string treeTitle;
   char titleChar; //first letter of book title
   treeNode* rightChild = nullptr;
   treeNode* leftChild = nullptr;
@@ -30,7 +31,10 @@ class Library{
     void deleteBook(string title);
     bool search(string title); //search for a book in the tree then hash table
     treeNode* createTreeNode(char titleChar); //creates a treenode and its hash table
-  private:
+    treeNode* addNode(string title);//adding a new tree node
+    treeNode* addNodeHelper(treeNode* currNode, char title);
+    treeNode* Library::searchTreeHelper(treeNode* curr, char firstChar);
+   private:
     unsigned int hash(string title); //returns hash value
     treeNode* searchTree(char titleChar); //recursive search tree helper
     treeNode* root; //private root variable
