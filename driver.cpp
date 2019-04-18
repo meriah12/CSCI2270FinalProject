@@ -1,62 +1,7 @@
 #include <iostream>
 #include <string>
 using namespace std;
-//#include "library.cpp"
-#include "death.hpp"
-
-void staffMenu(){
-  bool sControl = true;
-  while(sControl == true){
-    //Staff menu display
-    cout << "----------STAFF MENU----------" << endl;
-    cout << "1) Add a book to the library" << endl;
-    cout << "2) Remove a book from the library" << endl;
-    cout << "3) " << endl;
-    cout << "4) " << endl;
-    cout << "5) Exit Staff Menu" << endl;
-    string input;
-    getline(cin, input);
-    int iinput = stoi(input);
-
-    switch(iinput){
-      case 1:
-        cout << endl << "Add Book" << endl;
-        cout << "Enter the title of the new book: ";
-        string title;
-        getline(cin, title);
-        if(!l.search(title)){
-          bookNode* n = l.createBook(title);
-          l.addBook(n);
-        }
-        else{
-          cout << "Book already exists in the database" << endl;
-        }
-
-      break;
-
-      case 2:
-        cout << endl << "Remove Book" << endl;
-      break;
-
-      case 3:
-        cout << endl << "Option 3" << endl;
-      break;
-
-      case 4:
-        cout << endl << "Option 4" << endl;
-      break;
-
-      case 5:
-        cout << endl << "Returning to Main Menu" << endl;
-        sControl = false;
-      break;
-
-      default:
-        cout << "Invalid Input" << endl;
-      break;
-    }
-  }
-}
+#include "library.cpp"
 
 
 int main(){
@@ -86,12 +31,15 @@ int main(){
         cout << "Enter Book Title: ";
         getline (cin, title);
         cout << endl;
-        /*
-        if(l.search(title))
+
+        bookNode* temp = l.search(title);
+        if(temp -> title != title){
           l.checkOut(title);
+          cout << title << " has been checked out." << endl;
+        }
         else
           cout << "Book not found in the database. Cannot check out." << endl;
-        */
+
 
         //SEARCH FOR THE TITLE OF THE BOOK
         //IF BOOK IS FOUND, CALL THE CHECK OUT BOOK FUNCTION
@@ -108,12 +56,14 @@ int main(){
         cout << "Enter Book Title: ";
         getline(cin, title);
         cout << endl;
-        /*
-        if(l.search(title))
+
+        if(l.search(title) != NULL){
           l.checkIn(title);
+          cout << title << " has been returned." << endl;
+        }
         else
           cout << "Book not found in the database. Cannot return" << endl;
-        */
+
 
         //SEARCH FOR THE TITLE OF THE BOOK
         //IF BOOK IS FOUND, CALL THE RETURN BOOK FUNCTION
@@ -131,12 +81,12 @@ int main(){
         cout << "Enter Book Title to Search: ";
         getline(cin, title);
         cout << endl;
-        /*
-        if(l.search(title))
+
+        if(l.search(title) != NULL)
           cout << title << " exists in the database." << endl;
         else
-          cout << title << " does not exist in the database"
-        */
+          cout << title << " does not exist in the database" << endl;
+
         //Call the search function, if the book is not found, display that the book does not exist in the library
         //If the book is found, display the information of the book and whether it is checked out or not
 
@@ -151,7 +101,57 @@ int main(){
         getline(cin, inPassword);
         //If the user's input matches the correct password, access and call the staff menu function
         if(inPassword == "ABCD"){
-          staffMenu();
+          bool sControl = true;
+          while(sControl == true){
+            //Staff menu display
+            cout << "----------STAFF MENU----------" << endl;
+            cout << "1) Add a book to the library" << endl;
+            cout << "2) Remove a book from the library" << endl;
+            cout << "3) " << endl;
+            cout << "4) " << endl;
+            cout << "5) Exit Staff Menu" << endl;
+            string input;
+            getline(cin, input);
+            int iinput = stoi(input);
+
+            switch(iinput){
+              case 1:{
+                cout << endl << "Add Book" << endl;
+                cout << "Enter the title of the new book: ";
+                string title;
+                getline(cin, title);
+                if(l.search(title) == NULL){
+                  l.addBook(title);
+                }
+                else{
+                  cout << "Book already exists in the database" << endl;
+                }
+              }
+              break;
+
+              case 2:
+                cout << endl << "Remove Book" << endl;
+              break;
+
+              case 3:
+                cout << endl << "Option 3" << endl;
+              break;
+
+              case 4:
+                cout << endl << "Option 4" << endl;
+              break;
+
+              case 5:
+                cout << endl << "Returning to Main Menu" << endl;
+                sControl = false;
+              break;
+
+              default:
+                cout << "Invalid Input" << endl;
+              break;
+            }
+          }
+
         }
         //If the user cannot enter the pasword correctly, display a message and return to main menu
         else{
