@@ -31,16 +31,7 @@ int main(){
         cout << "Enter Book Title: ";
         getline (cin, title);
         cout << endl;
-
-        bookNode* temp = l.search(title);
-        if(temp -> title != title){
-          l.checkOut(title);
-          cout << title << " has been checked out." << endl;
-        }
-        else
-          cout << "Book not found in the database. Cannot check out." << endl;
-
-
+        l.checkOut(title);
         //SEARCH FOR THE TITLE OF THE BOOK
         //IF BOOK IS FOUND, CALL THE CHECK OUT BOOK FUNCTION
         //IF THE BOOK IS NOT FOUND, PRINT AN ERROR MESSAGE AND RETURN TO MAIN MENU
@@ -56,20 +47,10 @@ int main(){
         cout << "Enter Book Title: ";
         getline(cin, title);
         cout << endl;
-
-        if(l.search(title) != NULL){
-          l.checkIn(title);
-          cout << title << " has been returned." << endl;
-        }
-        else
-          cout << "Book not found in the database. Cannot return" << endl;
-
-
+        l.checkIn(title);
         //SEARCH FOR THE TITLE OF THE BOOK
         //IF BOOK IS FOUND, CALL THE RETURN BOOK FUNCTION
         //IF THE BOOK IS NOT FOUND, PRINT AN ERROR MESSAGE AND RETURN TO MAIN MENU
-
-
       }
       break;
 
@@ -129,8 +110,13 @@ int main(){
               }
               break;
 
-              case 2:
+              case 2:{
                 cout << endl << "Remove Book" << endl;
+                cout << endl << "Enter title of the book to be removed: ";
+                string title;
+                getline(cin, title);
+                //deleteBook(title);
+              }
               break;
 
               case 3:
