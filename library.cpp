@@ -12,7 +12,7 @@ Library::Library(int hashTableSize){
 }
 Library::~Library(){
 
-  //deletes a hash table
+  //deletes a single hash table
   for (int i=0; i<hashTableSize; i++){
     bookNode* head = hashTable[i];
     while(head!=nullptr){

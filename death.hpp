@@ -28,7 +28,7 @@ class Library{
     void addBook(string title); //add a book to the correct tree node at the correct spot in the hash table
     void deleteBook(string title);
     bool search(string title); //search for a book in the tree then hash table
-
+    treeNode* createTreeNode(char titleChar); //creates a treenode and its hash table
   private:
     unsigned int hash(string title); //returns hash value
     treeNode* searchTree(char titleChar); //recursive search tree helper
