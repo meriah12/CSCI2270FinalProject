@@ -16,7 +16,7 @@ struct treeNode{ //define node at each spot in the tree with titleChar and point
   treeNode* leftChild = nullptr;
   treeNode* parent = nullptr;
   int numBooks;
-  bookNode* hashTable; //pointer to a hashTable
+  bookNode** hashTable; //pointer to a hashTable
 };
 class Library{
   public:
@@ -27,7 +27,7 @@ class Library{
     bookNode* createBook(string title);
     void addBook(string title); //add a book to the correct tree node at the correct spot in the hash table
     void deleteBook(string title);
-    bool search(string title); //search for a book in the tree then hash table
+    bookNode* search(string title); //search for a book in the tree then hash table
     treeNode* createTreeNode(char titleChar); //creates a treenode and its hash table
   private:
     unsigned int hash(string title); //returns hash value
