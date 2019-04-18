@@ -33,7 +33,7 @@ class Library{
     treeNode* createTreeNode(char titleChar); //creates a treenode and its hash table
     treeNode* addNode(string title);//adding a new tree node
     treeNode* addNodeHelper(treeNode* currNode, char title);
-    treeNode* Library::searchTreeHelper(treeNode* curr, char firstChar);
+    treeNode* searchTreeHelper(treeNode* curr, char firstChar);
    private:
     unsigned int hash(string title); //returns hash value
     treeNode* searchTree(char titleChar); //recursive search tree helper
