@@ -21,6 +21,17 @@ void staffMenu(){
     switch(iinput){
       case 1:
         cout << endl << "Add Book" << endl;
+        cout << "Enter the title of the new book: ";
+        string title;
+        getline(cin, title);
+        if(!l.search(title)){
+          bookNode* n = l.createBook(title);
+          l.addBook(n);
+        }
+        else{
+          cout << "Book already exists in the database" << endl;
+        }
+
       break;
 
       case 2:
