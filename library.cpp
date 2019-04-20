@@ -137,28 +137,28 @@ treeNode* Library::createTreeNode(char titleChar){
   return t;
 }
 
-treeNode* Library::addNode(string title){
-  return addNodeHelper(root, title[0]);
-}
+// treeNode* Library::addNode(string title){
+//   return addNodeHelper(root, title[0]);
+// }
 
-treeNode* Library::addNodeHelper(treeNode* currNode, char title){
-  treeNode* searched = searchTree(root,title);
-  if(searched->titleChar == title){
-    return searched;
-  }
-  else{
-    if(currNode == nullptr){
-      return createTreeNode(title);
-    }
-    else if(currNode->titleChar < title){
-      currNode->rightChild = addNodeHelper(currNode->rightChild, title);
-    }
-    else if(currNode->titleChar > title){
-      currNode->leftChild = addNodeHelper(currNode->leftChild, title);
-    }
-  }
-  return nullptr;
-}
+// treeNode* Library::addNodeHelper(treeNode* currNode, char title){
+//   treeNode* searched = searchTree(root,title);
+//   if(searched->titleChar == title){
+//     return searched;
+//   }
+//   else{
+//     if(currNode == nullptr){
+//       return createTreeNode(title);
+//     }
+//     else if(currNode->titleChar < title){
+//       currNode->rightChild = addNodeHelper(currNode->rightChild, title);
+//     }
+//     else if(currNode->titleChar > title){
+//       currNode->leftChild = addNodeHelper(currNode->leftChild, title);
+//     }
+//   }
+//   return nullptr;
+// }
 
 unsigned int Library::hash(string title,int hashTableSize){
   unsigned int hashValue = 5381 ;
