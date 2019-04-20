@@ -40,4 +40,3 @@ class Library{
     int hashTableSize; //private hashtablesize variable
 };
 #endif
-
