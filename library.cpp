@@ -269,10 +269,6 @@ void Library::printCheckedOut(){
   printCheckedOutHelper(root);
   return;
 }
-  else
-    cout<<title<<" can't be checked out because it's not in the inventory."<<endl;
-  return;
-}
 
 void Library::checkIn(string title){
   bookNode* found = search(title);
