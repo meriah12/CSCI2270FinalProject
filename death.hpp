@@ -49,7 +49,7 @@ class Library{
    private:
     unsigned int hash(string title,int hashTableSize); //returns hash value
     treeNode* root; //private root variable
-    bookNode** hashTable; //private hashTable array variable
+    //bookNode** hashTable; //private hashTable array variable
     int hashTableSize; //private hashtablesize variable
 };
 #endif

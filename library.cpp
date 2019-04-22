@@ -43,24 +43,19 @@ treeNode* Library::createTree(){
 }
 
 void Library::checkOut(string title){
-  cout << "1" << endl;
   bookNode* found = search(title);
-<<<<<<< HEAD
-  cout << "2" << endl;
   if(found!=nullptr&&found->checkedOut==false){
     found->checkedOut=true;
     cout << title << " is now checked out" << endl;
   }
   else if(found!=nullptr&&found->checkedOut==true)
     cout<<title<<" already checked out."<<endl;
-=======
   if(found!=nullptr&&found->inCount > 0){
     found->checkedOut=true;
     found -> inCount = found -> inCount - 1;
   }
   else if(found!=nullptr&&found->inCount == 0)
     cout<< "All copies of "<<title<< " are already checked out."<<endl;
->>>>>>> 9913b36d17480980ce06832ac842eed48ef3dcb9
   else
     cout<<title<<" can't be checked out because it's not in the inventory."<<endl;
   return;
@@ -175,8 +170,8 @@ unsigned int Library::hash(string title,int hashTableSize){
   return hashValue;
 }
 
-<<<<<<< HEAD
 void Library::printBooks(treeNode *node, bookNode *title){
+  treeNode t;
   if(node == 0){
     //base case
     return;
@@ -186,8 +181,8 @@ void Library::printBooks(treeNode *node, bookNode *title){
   }
   cout << "Books starting with letter: " << node->titleChar << endl;
   for(int i = 0; i < hashTableSize; i++){
-    if(hashtable[i] != NULL){
-      bookNode* curr = hashTable[i];
+    if(t.hashTable[i] != NULL){
+      bookNode* curr = t.hashTable[i];
       while(curr != NULL){
         cout << curr->title;
         curr = curr->next;
@@ -201,7 +196,6 @@ void Library::printBooks(treeNode *node, bookNode *title){
   }
 }
 
-=======
 void Library::printHashByAuthor(string author, treeNode* t){
   for(int i=0;i<hashTableSize-1;i++){
     if(t->hashTable[i]!=nullptr){
@@ -307,4 +301,3 @@ void Library::printCheckedOut(){
   printCheckedOutHelper(root);
   return;
 }
->>>>>>> 9913b36d17480980ce06832ac842eed48ef3dcb9
