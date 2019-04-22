@@ -61,10 +61,12 @@ int main(){
         cout << endl << "BOOK SEARCH" << endl;
         cout << "Enter Book Title to Search: ";
         getline(cin, title);
-        cout << endl;
+        bookNode* search = l.search(title);
 
-        if(l.search(title) != nullptr)
+        if(search != nullptr){
           cout << title << " exists in the database." << endl;
+          cout << "Number of books not checked out: " << search -> inCount << endl << endl;;
+        }
         else
           cout << title << " does not exist in the database" << endl;
 
@@ -88,9 +90,11 @@ int main(){
             cout << "----------STAFF MENU----------" << endl;
             cout << "1) Add a book to the library" << endl;
             cout << "2) Remove a book from the library" << endl;
-            cout << "3) " << endl;
-            cout << "4) " << endl;
-            cout << "5) Exit Staff Menu" << endl;
+            cout << "3) Load in book file" << endl;
+            cout << "4) Get book information" << endl;
+            cout << "5) Search for checked out books" << endl;
+            cout << "6) Search for checked in books" << endl;
+            cout << "7) Exit Staff Menu" << endl;
             string input;
             getline(cin, input);
             int iinput = stoi(input);
@@ -101,11 +105,28 @@ int main(){
                 cout << "Enter the title of the new book: ";
                 string title;
                 getline(cin, title);
-                if(l.search(title) == nullptr){
+                bookNode* check = l.search(title);
+                if(check == nullptr){
                   l.addBook(title);
+                  cout << title << " successfully added to the database" << endl;
+                  cout << "-------------------------------" << endl;
+                  cout << "Book count for " << title << ":" << endl;
+                  cout << "Total books: " << check -> count << endl;
+                  cout << "Books in library: " << check -> inCount << endl;
+                  int co = (check -> count)-(check -> inCount);
+                  cout << "Books checked out: " << co << endl;
                 }
                 else{
-                  cout << "Book already exists in the database" << endl;
+                  cout << title << " already exists in database. Adding 1 to book count" << endl;
+                  check-> count = check -> count + 1;
+                  check -> inCount = check -> inCount + 1;
+                  cout << "-------------------------------" << endl;
+                  cout << "Book count for " << title << ":" << endl;
+                  cout << "Total books: " << check -> count << endl;
+                  cout << "Books in library: " << check -> inCount << endl;
+                  int co = (check -> count)-(check -> inCount);
+                  cout << "Books checked out: " << co << endl;
+
                 }
               }
               break;
@@ -121,7 +142,11 @@ int main(){
 
               case 3:
                 cout << endl << "Load in a file of books" << endl;
-                
+                cout << "Enter filename: ";
+                string filename;
+                getline(cin, filename);
+
+
               break;
 
               case 4:
@@ -129,6 +154,14 @@ int main(){
               break;
 
               case 5:
+                
+              break;
+
+              case 6:
+
+              break;
+
+              case 7:
                 cout << endl << "Returning to Main Menu" << endl;
                 sControl = false;
               break;
