@@ -130,6 +130,8 @@ bookNode* Library::search(string title){
       return nullptr;
     }
   }
+  else
+    return nullptr;
 }
 
 treeNode* Library::createTreeNode(char titleChar){
