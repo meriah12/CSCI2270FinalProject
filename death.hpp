@@ -23,6 +23,8 @@ struct treeNode{ //define node at each spot in the tree with titleChar and point
 };
 class Library{
   public:
+    //bookNode** hashTable;
+    void printBooks(treeNode *node, bookNode *title);
     treeNode* createTree();
     Library(int hashTableSize); //constructor creates tree with 26 nodes and 26 hash tables
     ~Library(); //destructor
@@ -47,7 +49,7 @@ class Library{
    private:
     unsigned int hash(string title,int hashTableSize); //returns hash value
     treeNode* root; //private root variable
-    // bookNode** hashTable; //private hashTable array variable
+    bookNode** hashTable; //private hashTable array variable
     int hashTableSize; //private hashtablesize variable
 };
 #endif

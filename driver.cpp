@@ -1,7 +1,7 @@
 #include <iostream>
 #include <string>
 using namespace std;
-#include "library.cpp"
+#include "death.hpp"
 
 
 int main(){
@@ -32,7 +32,9 @@ int main(){
         cout << "Enter Book Title: ";
         getline (cin, title);
         cout << endl;
+        cout << "checking out" << endl;
         l.checkOut(title);
+        cout << "checkout called" << endl;
         //SEARCH FOR THE TITLE OF THE BOOK
         //IF BOOK IS FOUND, CALL THE CHECK OUT BOOK FUNCTION
         //IF THE BOOK IS NOT FOUND, PRINT AN ERROR MESSAGE AND RETURN TO MAIN MENU
