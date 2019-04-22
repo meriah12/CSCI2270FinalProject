@@ -193,3 +193,71 @@ void Library::printByAuthor(string author){
   printByAuthorHelper(author,root);
   return;
 }
+
+void Library::printHashCheckedIn(treeNode* t){
+  for(int i=0;i<hashTableSize-1;i++){
+    if(t->hashTable[i]!=nullptr){
+      if(!t->hashTable[i]->checkedOut){
+        cout<<t->hashTable[i]->title<<endl;
+      }
+      while(t->hashTable[i]->next!=nullptr){
+        if(!t->hashTable[i]->checkedOut){
+          cout<<t->hashTable[i]->title<<endl;
+        }
+      }
+    }
+  }
+  return;
+}
+
+void Library::printCheckedInHelper(treeNode* currNode){
+  if(currNode==nullptr)
+    return;
+  else{
+    if(currNode->leftChild!=nullptr)
+      printCheckedInHelper(currNode->leftChild);
+    printHashCheckedIn(currNode);
+    if(currNode->rightChild!=nullptr)
+      printCheckedInHelper(currNode->rightChild);
+  }
+}
+
+void Library::printCheckedIn(){
+  cout<<"All books currently avaliable to be checked out:"<<endl;
+  printCheckedInHelper(root);
+  return;
+}
+
+void Library::printHashCheckedOut(treeNode* t){
+  for(int i=0;i<hashTableSize-1;i++){
+    if(t->hashTable[i]!=nullptr){
+      if(t->hashTable[i]->checkedOut){
+        cout<<t->hashTable[i]->title<<endl;
+      }
+      while(t->hashTable[i]->next!=nullptr){
+        if(t->hashTable[i]->checkedOut){
+          cout<<t->hashTable[i]->title<<endl;
+        }
+      }
+    }
+  }
+  return;
+}
+
+void Library::printCheckedOutHelper(treeNode* currNode){
+  if(currNode==nullptr)
+    return;
+  else{
+    if(currNode->leftChild!=nullptr)
+      printCheckedOutHelper(currNode->leftChild);
+    printHashCheckedOut(currNode);
+    if(currNode->rightChild!=nullptr)
+      printCheckedOutHelper(currNode->rightChild);
+  }
+}
+
+void Library::printCheckedOut(){
+  cout<<"All books currently checked out:"<<endl;
+  printCheckedOutHelper(root);
+  return;
+}

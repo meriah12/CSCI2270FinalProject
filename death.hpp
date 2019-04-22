@@ -36,6 +36,13 @@ class Library{
     treeNode* searchTree(treeNode* curr, char titleChar); //recursive search tree
     bookNode* search(string title); //search for a book in the tree then hash table
     treeNode* createTreeNode(char titleChar); //creates a treenode and its hash table
+    void printHashCheckedIn(treeNode* t);
+    void printCheckedInHelper(treeNode* currNode);
+    void printCheckedIn();
+    void printHashCheckedOut(treeNode* t);
+    void printCheckedOutHelper(treeNode* currNode);
+    void printCheckedOut();
+
    private:
     unsigned int hash(string title,int hashTableSize); //returns hash value
     treeNode* root; //private root variable
