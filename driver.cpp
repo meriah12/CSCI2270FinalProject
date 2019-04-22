@@ -63,7 +63,7 @@ int main(){
         getline(cin, title);
         cout << endl;
 
-        if(l.search(title) != NULL)
+        if(l.search(title) != nullptr)
           cout << title << " exists in the database." << endl;
         else
           cout << title << " does not exist in the database" << endl;
@@ -101,7 +101,7 @@ int main(){
                 cout << "Enter the title of the new book: ";
                 string title;
                 getline(cin, title);
-                if(l.search(title) == NULL){
+                if(l.search(title) == nullptr){
                   l.addBook(title);
                 }
                 else{

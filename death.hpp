@@ -12,21 +12,19 @@ struct bookNode{ //define node for each spot in hash table
   bookNode* next; //pointer to next node for open addressing
 };
 struct treeNode{ //define node at each spot in the tree with titleChar and pointer to hashTable
-  string treeTitle;
   char titleChar; //first letter of book title
   treeNode* rightChild;
   treeNode* leftChild;
-  treeNode* parent;
   int numBooks;
   bookNode** hashTable; //pointer to a hashTable
-  treeNode(char titleChar){
+  /*treeNode(char titleChar){
     this->titleChar = titleChar;
-    this->leftChild = this->rightChild = NULL;
-  }
+    this->leftChild = this->rightChild = nullptr;
+  }*/
 };
 class Library{
   public:
-    void createTree();
+    treeNode* createTree();
     Library(int hashTableSize); //constructor creates tree with 26 nodes and 26 hash tables
     ~Library(); //destructor
     void checkOut(string title); //check out a book and set its bool to true

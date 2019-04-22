@@ -6,24 +6,25 @@ using namespace std;
 
 Library::Library(int hashTableSize){
   this->hashTableSize=hashTableSize;
+  this->root=createTree();
 }
 
 Library::~Library(){
 
 }
 
-void Library::createTree(){
+treeNode* Library::createTree(){
   //creating tree excluding letters F, Q, X
-  treeNode *root = createTreeNode('M');
+  treeNode* root = createTreeNode('M');
   root->leftChild = createTreeNode('K');
   root->rightChild = createTreeNode('O');
-  root->leftChild->leftChild = createTreeNode('I');;
+  root->leftChild->leftChild = createTreeNode('I');
   root->leftChild->rightChild = createTreeNode('L');
-  root->leftChild->leftChild->rightChild = createTreeNode('J');;
-  root->leftChild->leftChild->leftChild = createTreeNode('G');;
-  root->leftChild->leftChild->leftChild->rightChild = createTreeNode('H');;
+  root->leftChild->leftChild->rightChild = createTreeNode('J');
+  root->leftChild->leftChild->leftChild = createTreeNode('G');
+  root->leftChild->leftChild->leftChild->rightChild = createTreeNode('H');
   root->leftChild->leftChild->leftChild->leftChild = createTreeNode('D');
-  root->leftChild->leftChild->leftChild->leftChild->rightChild = createTreeNode('E');;
+  root->leftChild->leftChild->leftChild->leftChild->rightChild = createTreeNode('E');
   root->leftChild->leftChild->leftChild->leftChild->leftChild = createTreeNode('B');
   root->leftChild->leftChild->leftChild->leftChild->leftChild->rightChild = createTreeNode('C');
   root->leftChild->leftChild->leftChild->leftChild->leftChild->leftChild = createTreeNode('A');
@@ -38,7 +39,7 @@ void Library::createTree(){
   root->rightChild->rightChild->rightChild->rightChild->rightChild = createTreeNode('Y');
   root->rightChild->rightChild->rightChild->rightChild->rightChild->leftChild = createTreeNode('W');
   root->rightChild->rightChild->rightChild->rightChild->rightChild->rightChild = createTreeNode('Z');
-
+  return root;
 }
 
 void Library::checkOut(string title){
@@ -73,7 +74,9 @@ bookNode* Library::createBook(string title){
 void Library::addBook(string title){
   char titleChar = title[0];
   treeNode* foundTreeNode = searchTree(root,titleChar);
+  cout<<"found tree node with titleChar "<<foundTreeNode->titleChar<<endl;
   if(foundTreeNode!=nullptr){
+    cout<<"in tree node"<<endl;
     foundTreeNode->numBooks++;
     unsigned int index = hash(title,hashTableSize);
     bookNode* n = createBook(title);
@@ -110,7 +113,10 @@ bookNode* Library::search(string title){
   treeNode* foundTreeNode = searchTree(root,titleChar);
   if(foundTreeNode!=nullptr){//if the tree has a tree node for the title char
     unsigned int index = hash(title,hashTableSize);
-    if(foundTreeNode->hashTable[index]->title==title){
+    if(foundTreeNode->hashTable[index]==nullptr){
+      return nullptr;
+    }
+    else if(foundTreeNode->hashTable[index]->title==title){
       return foundTreeNode->hashTable[index];
     }
     else{
@@ -121,14 +127,16 @@ bookNode* Library::search(string title){
         }
         temp=temp->next;
       }
+      return nullptr;
     }
   }
-  return nullptr;
 }
 
 treeNode* Library::createTreeNode(char titleChar){
-  treeNode* t;
+  treeNode* t = new treeNode;
   t->titleChar=titleChar;
+  t->rightChild=nullptr;
+  t->leftChild=nullptr;
   t->numBooks=0;
   t->hashTable=new bookNode*[hashTableSize];
   for(int i=0;i<hashTableSize;i++){
