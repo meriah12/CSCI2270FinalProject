@@ -14,30 +14,30 @@ Library::~Library(){
 
 void Library::createTree(){
   //creating tree excluding letters F, Q, X
-  treeNode *root = new treeNode('M');
-  root->leftChild = new treeNode('K');
-  root->rightChild = new treeNode('O');
-  root->leftChild->leftChild = new treeNode('I');
-  root->leftChild->rightChild = new treeNode('L');
-  root->leftChild->leftChild->rightChild = new treeNode('J');
-  root->leftChild->leftChild->leftChild = new treeNode('G');
-  root->leftChild->leftChild->leftChild->rightChild = new treeNode('H');
-  root->leftChild->leftChild->leftChild->leftChild = new treeNode('D');
-  root->leftChild->leftChild->leftChild->leftChild->rightChild = new treeNode('E');
-  root->leftChild->leftChild->leftChild->leftChild->leftChild = new treeNode('B');
-  root->leftChild->leftChild->leftChild->leftChild->leftChild->rightChild = new treeNode('C');
-  root->leftChild->leftChild->leftChild->leftChild->leftChild->leftChild = new treeNode('A');
+  treeNode *root = createTreeNode('M');
+  root->leftChild = createTreeNode('K');
+  root->rightChild = createTreeNode('O');
+  root->leftChild->leftChild = createTreeNode('I');;
+  root->leftChild->rightChild = createTreeNode('L');
+  root->leftChild->leftChild->rightChild = createTreeNode('J');;
+  root->leftChild->leftChild->leftChild = createTreeNode('G');;
+  root->leftChild->leftChild->leftChild->rightChild = createTreeNode('H');;
+  root->leftChild->leftChild->leftChild->leftChild = createTreeNode('D');
+  root->leftChild->leftChild->leftChild->leftChild->rightChild = createTreeNode('E');;
+  root->leftChild->leftChild->leftChild->leftChild->leftChild = createTreeNode('B');
+  root->leftChild->leftChild->leftChild->leftChild->leftChild->rightChild = createTreeNode('C');
+  root->leftChild->leftChild->leftChild->leftChild->leftChild->leftChild = createTreeNode('A');
 
-  root->rightChild->leftChild = new treeNode('N');
-  root->rightChild->rightChild = new treeNode('R');
-  root->rightChild->rightChild->leftChild = new treeNode('P');
-  root->rightChild->rightChild->rightChild = new treeNode('T');
-  root->rightChild->rightChild->rightChild->leftChild = new treeNode('S');
-  root->rightChild->rightChild->rightChild->rightChild = new treeNode('V');
-  root->rightChild->rightChild->rightChild->rightChild->leftChild = new treeNode('U');
-  root->rightChild->rightChild->rightChild->rightChild->rightChild = new treeNode('Y');
-  root->rightChild->rightChild->rightChild->rightChild->rightChild->leftChild = new treeNode('W');
-  root->rightChild->rightChild->rightChild->rightChild->rightChild->rightChild = new treeNode('Z');
+  root->rightChild->leftChild = createTreeNode('N');
+  root->rightChild->rightChild = createTreeNode('R');
+  root->rightChild->rightChild->leftChild = createTreeNode('P');
+  root->rightChild->rightChild->rightChild = createTreeNode('T');
+  root->rightChild->rightChild->rightChild->leftChild = createTreeNode('S');
+  root->rightChild->rightChild->rightChild->rightChild = createTreeNode('V');
+  root->rightChild->rightChild->rightChild->rightChild->leftChild = createTreeNode('U');
+  root->rightChild->rightChild->rightChild->rightChild->rightChild = createTreeNode('Y');
+  root->rightChild->rightChild->rightChild->rightChild->rightChild->leftChild = createTreeNode('W');
+  root->rightChild->rightChild->rightChild->rightChild->rightChild->rightChild = createTreeNode('Z');
 
 }
 
