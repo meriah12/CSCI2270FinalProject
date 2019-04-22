@@ -7,6 +7,7 @@ using namespace std;
 int main(){
   bool control = true;
   Library l(100);
+  l.createTree();
 
   //While loop allows for continuous interaction with the program until the user decides to leave
   while(control == true){
