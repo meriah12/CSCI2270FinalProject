@@ -16,8 +16,9 @@ int main(){
     cout << "1) Check Out a Book" << endl;
     cout << "2) Return a Book" << endl;
     cout << "3) Search For a Book" << endl;
-    cout << "4) Go to Staff Menu" << endl;
-    cout << "5) Exit Program" << endl;
+    cout << "4) Search For Books by Author" << endl;
+    cout << "5) Go to Staff Menu" << endl;
+    cout << "6) Exit Program" << endl;
     cout << "Response: ";
     getline(cin, input);
     int iinput = stoi(input);
@@ -76,9 +77,12 @@ int main(){
       }
       break;
 
+      case 4:
+
+      break;
       //Staff Menu Option
       //The staff menu is password protected and allows a staff member to access the other functions and code that would not be available to the public
-      case 4:{
+      case 5:{
         string inPassword;
         cout << endl << "Enter Staff Password: ";
         getline(cin, inPassword);
@@ -95,6 +99,7 @@ int main(){
             cout << "5) Search for checked out books" << endl;
             cout << "6) Search for checked in books" << endl;
             cout << "7) Exit Staff Menu" << endl;
+            cout << "Response: ";
             string input;
             getline(cin, input);
             int iinput = stoi(input);
@@ -191,7 +196,7 @@ int main(){
       break;
 
       //Exits the program
-      case 5:
+      case 6:
         cout << endl <<"Exiting Program" << endl;
         control = false;
       break;
