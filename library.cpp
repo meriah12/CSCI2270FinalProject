@@ -49,7 +49,7 @@ void Library::checkOut(string title){
     found -> inCount = found -> inCount - 1;
   }
   else if(found!=nullptr&&found->inCount == 0)
-    cout<< "All copies of "<<title<< " are already checked out."<<endl;
+    cout<< "All copies of " << title << " are already checked out."<<endl;
   else
     cout<<title<<" can't be checked out because it's not in the inventory."<<endl;
   return;
@@ -62,7 +62,7 @@ void Library::checkIn(string title){
     found -> inCount = found -> inCount + 1;
   }
   else if(found!=nullptr&&found->inCount == found -> count)
-    cout<<title<<" has not been checked out."<<endl;
+    cout << "All copies of "<< title << " are not checked out."<<endl;
   else
     cout<<title<<" can't be checked in because it's not in the inventory.";
 }
@@ -167,10 +167,12 @@ void Library::printHashByAuthor(string author, treeNode* t){
     if(t->hashTable[i]!=nullptr){
       if(t->hashTable[i]->author==author){
         cout<<t->hashTable[i]->title<<endl;
+        cout << "Copies available: " << t->hashTable[i] -> count - t->hashTable[i] -> inCount << endl;
       }
       while(t->hashTable[i]->next!=nullptr){
         if(t->hashTable[i]->author==author){
           cout<<t->hashTable[i]->title<<endl;
+          cout << "Copies available: " << t->hashTable[i] -> count - t->hashTable[i] -> inCount << endl;
         }
       }
     }
