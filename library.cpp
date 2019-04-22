@@ -225,7 +225,7 @@ void Library::printCheckedInHelper(treeNode* currNode){
 }
 
 void Library::printCheckedIn(){
-  cout<<"All books currently avaliable to be checked out:"<<endl;
+  cout<<"All books currently checked in:"<<endl;
   printCheckedInHelper(root);
   return;
 }

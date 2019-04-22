@@ -96,8 +96,8 @@ int main(){
             cout << "2) Remove a book from the library" << endl;
             cout << "3) Load in book file" << endl;
             cout << "4) Get book information" << endl;
-            cout << "5) Search for checked out books" << endl;
-            cout << "6) Search for checked in books" << endl;
+            cout << "5) Print checked out books" << endl;
+            cout << "6) Print checked in books" << endl;
             cout << "7) Exit Staff Menu" << endl;
             cout << "Response: ";
             string input;
@@ -116,13 +116,14 @@ int main(){
                 bookNode* check = l.search(title);
                 if(check == nullptr){
                   l.addBook(title, author);
+                  check = l.search(title);
                   cout << title << " successfully added to the database" << endl;
                   cout << "-------------------------------" << endl;
                   cout << "Book count for " << title << ":" << endl;
-                  cout << "Total books: " << check -> count << endl;
-                  cout << "Books in library: " << check -> inCount << endl;
+                  cout << "Total copies: " << check -> count << endl;
+                  cout << "Copies currently in library: " << check -> inCount << endl;
                   int co = (check -> count)-(check -> inCount);
-                  cout << "Books checked out: " << co << endl;
+                  cout << "Copies currently checked out: " << co << endl;
                 }
 
                 else{
@@ -131,10 +132,10 @@ int main(){
                   check -> inCount = check -> inCount + 1;
                   cout << "-------------------------------" << endl;
                   cout << "Book count for " << title << ":" << endl;
-                  cout << "Total books: " << check -> count << endl;
-                  cout << "Books in library: " << check -> inCount << endl;
+                  cout << "Total copies: " << check -> count << endl;
+                  cout << "Copies currently in library: " << check -> inCount << endl;
                   int co = (check -> count)-(check -> inCount);
-                  cout << "Books checked out: " << co << endl;
+                  cout << "Copies currently checked out: " << co << endl;
 
                 }
               }
@@ -168,12 +169,16 @@ int main(){
               }
               break;
 
-              case 5:
-
+              case 5:{
+                cout<<endl<<"Print checked out books"<<endl;
+                l.printCheckedOut();
+              }
               break;
 
-              case 6:
-
+              case 6:{
+                cout<<endl<<"Print checked in books"<<endl;
+                l.printCheckedIn();
+              }
               break;
 
               case 7:
