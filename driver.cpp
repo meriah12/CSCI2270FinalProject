@@ -131,8 +131,13 @@ int main(){
               }
               break;
 
-              case 4:
-                cout << endl << "Option 4" << endl;
+              case 4:{
+                cout << endl << "Print By Author" << endl;
+                cout<<endl<<"Enter the author to print books by: ";
+                string author;
+                getline(cin,author);
+                l.printByAuthor(author);
+              }
               break;
 
               case 5:
