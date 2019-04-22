@@ -17,10 +17,6 @@ struct treeNode{ //define node at each spot in the tree with titleChar and point
   treeNode* leftChild;
   int numBooks;
   bookNode** hashTable; //pointer to a hashTable
-  /*treeNode(char titleChar){
-    this->titleChar = titleChar;
-    this->leftChild = this->rightChild = nullptr;
-  }*/
 };
 class Library{
   public:
