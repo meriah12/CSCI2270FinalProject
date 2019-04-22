@@ -119,7 +119,7 @@ int main(){
                   int co = (check -> count)-(check -> inCount);
                   cout << "Books checked out: " << co << endl;
                 }
-                
+
                 else{
                   cout << title << " already exists in database. Adding 1 to book count" << endl;
                   check-> count = check -> count + 1;
@@ -145,12 +145,13 @@ int main(){
               break;
 
               case 3:
+              {
                 cout << endl << "Load in a file of books" << endl;
                 cout << "Enter filename: ";
                 string filename;
                 getline(cin, filename);
 
-
+              }
               break;
 
               case 4:{
