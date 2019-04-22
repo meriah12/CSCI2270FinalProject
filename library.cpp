@@ -63,23 +63,22 @@ void Library::checkIn(string title){
     cout<<title<<" can't be checked in because it's not in the inventory.";
 }
 
-bookNode* Library::createBook(string title){
+bookNode* Library::createBook(string title,string author){
   bookNode* n = new bookNode;
   n->title=title;
+  n->author=author;
   n->checkedOut=false;
   n->next=nullptr;
   return n;
 }
 
-void Library::addBook(string title){
+void Library::addBook(string title,string author){
   char titleChar = title[0];
   treeNode* foundTreeNode = searchTree(root,titleChar);
-  cout<<"found tree node with titleChar "<<foundTreeNode->titleChar<<endl;
   if(foundTreeNode!=nullptr){
-    cout<<"in tree node"<<endl;
     foundTreeNode->numBooks++;
     unsigned int index = hash(title,hashTableSize);
-    bookNode* n = createBook(title);
+    bookNode* n = createBook(title,author);
     if(foundTreeNode->hashTable[index]==nullptr){ //if index is empty
       n->next=nullptr;
       foundTreeNode->hashTable[index]=n;
@@ -155,4 +154,42 @@ unsigned int Library::hash(string title,int hashTableSize){
   }
   hashValue %= hashTableSize;
   return hashValue;
+}
+
+void Library::printHashByAuthor(string author, treeNode* t){
+  for(int i=0;i<hashTableSize-1;i++){
+    if(t->hashTable[i]!=nullptr){
+      if(t->hashTable[i]->author==author){
+        cout<<t->hashTable[i]->title<<endl;
+      }
+      while(t->hashTable[i]->next!=nullptr){
+        if(t->hashTable[i]->author==author){
+          cout<<t->hashTable[i]->title<<endl;
+        }
+      }
+    }
+  }
+  return;
+}
+
+void Library::printByAuthorHelper(string author, treeNode* currNode){
+  if(currNode==nullptr){
+    return;
+  }
+  else{
+    if(currNode->leftChild!=nullptr){
+      printByAuthorHelper(author,currNode->leftChild);
+    }
+    printHashByAuthor(author,currNode);
+    if(currNode->rightChild!=nullptr){
+      printByAuthorHelper(author,currNode->rightChild);
+    }
+    return;
+  }
+}
+
+void Library::printByAuthor(string author){
+  cout<<"All books written by "<<author<<":"<<endl;
+  printByAuthorHelper(author,root);
+  return;
 }
