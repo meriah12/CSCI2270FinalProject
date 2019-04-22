@@ -90,6 +90,7 @@ void Library::addBook(string title,string author){
       foundTreeNode->hashTable[index]=n;
     }
   return;
+  }
 }
 
 treeNode* Library::searchTree(treeNode* curr, char titleChar){
