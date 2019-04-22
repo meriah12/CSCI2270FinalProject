@@ -80,6 +80,7 @@ int main(){
       case 4:
 
       break;
+      
       //Staff Menu Option
       //The staff menu is password protected and allows a staff member to access the other functions and code that would not be available to the public
       case 5:{
