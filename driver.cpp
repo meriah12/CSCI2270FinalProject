@@ -58,7 +58,7 @@ int main(){
       //This option allows a user to search the library database for a book and see if it exists
       case 3:{
         string title;
-        cout << endl << "BOOK SEARCH" << endl;
+        cout << endl << "BOOK SEARCH BY TITLE" << endl;
         cout << "Enter Book Title to Search: ";
         getline(cin, title);
         bookNode* search = l.search(title);
@@ -105,9 +105,12 @@ int main(){
                 cout << "Enter the title of the new book: ";
                 string title;
                 getline(cin, title);
+                cout<< "Enter the author of the new book: ";
+                string author;
+                getline(cin,author);
                 bookNode* check = l.search(title);
                 if(check == nullptr){
-                  l.addBook(title);
+                  l.addBook(title, author);
                   cout << title << " successfully added to the database" << endl;
                   cout << "-------------------------------" << endl;
                   cout << "Book count for " << title << ":" << endl;
@@ -116,6 +119,7 @@ int main(){
                   int co = (check -> count)-(check -> inCount);
                   cout << "Books checked out: " << co << endl;
                 }
+                
                 else{
                   cout << title << " already exists in database. Adding 1 to book count" << endl;
                   check-> count = check -> count + 1;
@@ -149,12 +153,17 @@ int main(){
 
               break;
 
-              case 4:
-                cout << endl << "Option 4" << endl;
+              case 4:{
+                cout << endl << "Print By Author" << endl;
+                cout<<endl<<"Enter the author to print books by: ";
+                string author;
+                getline(cin,author);
+                l.printByAuthor(author);
+              }
               break;
 
               case 5:
-                
+
               break;
 
               case 6:
