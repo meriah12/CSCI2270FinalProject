@@ -88,8 +88,8 @@ int main(){
             cout << "----------STAFF MENU----------" << endl;
             cout << "1) Add a book to the library" << endl;
             cout << "2) Remove a book from the library" << endl;
-            cout << "3) Print by Author" << endl;
-            cout << "4) " << endl;
+            cout << "3) Load in a file of books" << endl;
+            cout << "4) Print by Author" << endl;
             cout << "5) Exit Staff Menu" << endl;
             string input;
             getline(cin, input);
@@ -124,7 +124,7 @@ int main(){
 
               case 3:
                 cout << endl << "Load in a file of books" << endl;
-                
+
               break;
 
               case 4:{
