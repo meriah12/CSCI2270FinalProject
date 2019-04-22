@@ -16,8 +16,9 @@ int main(){
     cout << "1) Check Out a Book" << endl;
     cout << "2) Return a Book" << endl;
     cout << "3) Search For a Book" << endl;
-    cout << "4) Go to Staff Menu" << endl;
-    cout << "5) Exit Program" << endl;
+    cout << "4) Search For Books by Author" << endl;
+    cout << "5) Go to Staff Menu" << endl;
+    cout << "6) Exit Program" << endl;
     cout << "Response: ";
     getline(cin, input);
     int iinput = stoi(input);
@@ -61,10 +62,12 @@ int main(){
         cout << endl << "BOOK SEARCH BY TITLE" << endl;
         cout << "Enter Book Title to Search: ";
         getline(cin, title);
-        cout << endl;
+        bookNode* search = l.search(title);
 
-        if(l.search(title) != nullptr)
+        if(search != nullptr){
           cout << title << " exists in the database." << endl;
+          cout << "Number of books not checked out: " << search -> inCount << endl << endl;;
+        }
         else
           cout << title << " does not exist in the database" << endl;
 
@@ -74,9 +77,12 @@ int main(){
       }
       break;
 
+      case 4:
+
+      break;
       //Staff Menu Option
       //The staff menu is password protected and allows a staff member to access the other functions and code that would not be available to the public
-      case 4:{
+      case 5:{
         string inPassword;
         cout << endl << "Enter Staff Password: ";
         getline(cin, inPassword);
@@ -88,9 +94,12 @@ int main(){
             cout << "----------STAFF MENU----------" << endl;
             cout << "1) Add a book to the library" << endl;
             cout << "2) Remove a book from the library" << endl;
-            cout << "3) Load in a file of books" << endl;
-            cout << "4) Print by Author" << endl;
-            cout << "5) Exit Staff Menu" << endl;
+            cout << "3) Load in book file" << endl;
+            cout << "4) Get book information" << endl;
+            cout << "5) Search for checked out books" << endl;
+            cout << "6) Search for checked in books" << endl;
+            cout << "7) Exit Staff Menu" << endl;
+            cout << "Response: ";
             string input;
             getline(cin, input);
             int iinput = stoi(input);
@@ -104,11 +113,29 @@ int main(){
                 cout<< "Enter the author of the new book: ";
                 string author;
                 getline(cin,author);
-                if(l.search(title) == nullptr){
-                  l.addBook(title,author);
+                bookNode* check = l.search(title);
+                if(check == nullptr){
+                  l.addBook(title, author);
+                  cout << title << " successfully added to the database" << endl;
+                  cout << "-------------------------------" << endl;
+                  cout << "Book count for " << title << ":" << endl;
+                  cout << "Total books: " << check -> count << endl;
+                  cout << "Books in library: " << check -> inCount << endl;
+                  int co = (check -> count)-(check -> inCount);
+                  cout << "Books checked out: " << co << endl;
                 }
+
                 else{
-                  cout << "Book already exists in the database" << endl;
+                  cout << title << " already exists in database. Adding 1 to book count" << endl;
+                  check-> count = check -> count + 1;
+                  check -> inCount = check -> inCount + 1;
+                  cout << "-------------------------------" << endl;
+                  cout << "Book count for " << title << ":" << endl;
+                  cout << "Total books: " << check -> count << endl;
+                  cout << "Books in library: " << check -> inCount << endl;
+                  int co = (check -> count)-(check -> inCount);
+                  cout << "Books checked out: " << co << endl;
+
                 }
               }
               break;
@@ -123,8 +150,13 @@ int main(){
               break;
 
               case 3:
+              {
                 cout << endl << "Load in a file of books" << endl;
+                cout << "Enter filename: ";
+                string filename;
+                getline(cin, filename);
 
+              }
               break;
 
               case 4:{
@@ -137,6 +169,14 @@ int main(){
               break;
 
               case 5:
+
+              break;
+
+              case 6:
+
+              break;
+
+              case 7:
                 cout << endl << "Returning to Main Menu" << endl;
                 sControl = false;
               break;
@@ -156,7 +196,7 @@ int main(){
       break;
 
       //Exits the program
-      case 5:
+      case 6:
         cout << endl <<"Exiting Program" << endl;
         control = false;
       break;

@@ -69,6 +69,8 @@ bookNode* Library::createBook(string title,string author){
   n->author=author;
   n->checkedOut=false;
   n->next=nullptr;
+  n->count = 1;
+  n -> inCount = 1;
   return n;
 }
 
@@ -87,8 +89,8 @@ void Library::addBook(string title,string author){
       n->next=foundTreeNode->hashTable[index];
       foundTreeNode->hashTable[index]=n;
     }
-  }
   return;
+  }
 }
 
 treeNode* Library::searchTree(treeNode* curr, char titleChar){
