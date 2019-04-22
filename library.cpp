@@ -68,27 +68,29 @@ bookNode* Library::createBook(string title){
   n->title=title;
   n->checkedOut=false;
   n->next=nullptr;
+  n->count = 1;
+  n -> inCount = 1;
   return n;
 }
 
 void Library::addBook(string title){
-  char titleChar = title[0];
-  treeNode* foundTreeNode = searchTree(root,titleChar);
-  cout<<"found tree node with titleChar "<<foundTreeNode->titleChar<<endl;
-  if(foundTreeNode!=nullptr){
-    cout<<"in tree node"<<endl;
-    foundTreeNode->numBooks++;
-    unsigned int index = hash(title,hashTableSize);
-    bookNode* n = createBook(title);
-    if(foundTreeNode->hashTable[index]==nullptr){ //if index is empty
-      n->next=nullptr;
-      foundTreeNode->hashTable[index]=n;
+    char titleChar = title[0];
+    treeNode* foundTreeNode = searchTree(root,titleChar);
+    cout<<"found tree node with titleChar "<<foundTreeNode->titleChar<<endl;
+    if(foundTreeNode!=nullptr){
+      cout<<"in tree node"<<endl;
+      foundTreeNode->numBooks++;
+      unsigned int index = hash(title,hashTableSize);
+      bookNode* n = createBook(title);
+      if(foundTreeNode->hashTable[index]==nullptr){ //if index is empty
+        n->next=nullptr;
+        foundTreeNode->hashTable[index]=n;
+      }
+      else{ //if index is not empty
+        n->next=foundTreeNode->hashTable[index];
+        foundTreeNode->hashTable[index]=n;
+      }
     }
-    else{ //if index is not empty
-      n->next=foundTreeNode->hashTable[index];
-      foundTreeNode->hashTable[index]=n;
-    }
-  }
   return;
 }
 
