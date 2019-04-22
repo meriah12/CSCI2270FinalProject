@@ -44,10 +44,12 @@ treeNode* Library::createTree(){
 
 void Library::checkOut(string title){
   bookNode* found = search(title);
-  if(found!=nullptr&&found->checkedOut==false)
+  if(found!=nullptr&&found->inCount > 0){
     found->checkedOut=true;
-  else if(found!=nullptr&&found->checkedOut==true)
-    cout<<title<<" already checked out."<<endl;
+    found -> inCount = found -> inCount - 1;
+  }
+  else if(found!=nullptr&&found->inCount == 0)
+    cout<< "All copies of "<<title<< " are already checked out."<<endl;
   else
     cout<<title<<" can't be checked out because it's not in the inventory."<<endl;
   return;
@@ -55,9 +57,11 @@ void Library::checkOut(string title){
 
 void Library::checkIn(string title){
   bookNode* found = search(title);
-  if(found!=nullptr&&found->checkedOut==true)
+  if(found!=nullptr && found -> inCount < found -> count){
     found->checkedOut=false;
-  else if(found!=nullptr&&found->checkedOut==false)
+    found -> inCount = found -> inCount + 1;
+  }
+  else if(found!=nullptr&&found->inCount == found -> count)
     cout<<title<<" has not been checked out."<<endl;
   else
     cout<<title<<" can't be checked in because it's not in the inventory.";
