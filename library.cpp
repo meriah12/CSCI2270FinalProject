@@ -44,10 +44,18 @@ treeNode* Library::createTree(){
 
 void Library::checkOut(string title){
   bookNode* found = search(title);
-  if(found!=nullptr&&found->checkedOut==false)
+  if(found!=nullptr&&found->checkedOut==false){
     found->checkedOut=true;
+    cout << title << " is now checked out" << endl;
+  }
   else if(found!=nullptr&&found->checkedOut==true)
     cout<<title<<" already checked out."<<endl;
+  if(found!=nullptr&&found->inCount > 0){
+    found->checkedOut=true;
+    found -> inCount = found -> inCount - 1;
+  }
+  else if(found!=nullptr&&found->inCount == 0)
+    cout<< "All copies of "<<title<< " are already checked out."<<endl;
   else
     cout<<title<<" can't be checked out because it's not in the inventory."<<endl;
   return;
@@ -55,9 +63,11 @@ void Library::checkOut(string title){
 
 void Library::checkIn(string title){
   bookNode* found = search(title);
-  if(found!=nullptr&&found->checkedOut==true)
+  if(found!=nullptr && found -> inCount < found -> count){
     found->checkedOut=false;
-  else if(found!=nullptr&&found->checkedOut==false)
+    found -> inCount = found -> inCount + 1;
+  }
+  else if(found!=nullptr&&found->inCount == found -> count)
     cout<<title<<" has not been checked out."<<endl;
   else
     cout<<title<<" can't be checked in because it's not in the inventory.";
@@ -84,17 +94,19 @@ void Library::addBook(string title,string author){
     if(foundTreeNode->hashTable[index]==nullptr){ //if index is empty
       n->next=nullptr;
       foundTreeNode->hashTable[index]=n;
+      cout << "Adding book empty index" << endl;
     }
     else{ //if index is not empty
       n->next=foundTreeNode->hashTable[index];
       foundTreeNode->hashTable[index]=n;
+      cout << "Adding book" << endl;
     }
   return;
   }
 }
 
 treeNode* Library::searchTree(treeNode* curr, char titleChar){
-  if(curr == nullptr) {
+   if(curr == nullptr) {
     return nullptr;
   }
   if(curr->titleChar == titleChar){
@@ -111,7 +123,7 @@ treeNode* Library::searchTree(treeNode* curr, char titleChar){
 
 bookNode* Library::search(string title){
   char titleChar = title[0];
-  treeNode* foundTreeNode = searchTree(root,titleChar);
+  treeNode* foundTreeNode = searchTree(root, titleChar);
   if(foundTreeNode!=nullptr){//if the tree has a tree node for the title char
     unsigned int index = hash(title,hashTableSize);
     if(foundTreeNode->hashTable[index]==nullptr){
@@ -156,6 +168,32 @@ unsigned int Library::hash(string title,int hashTableSize){
   }
   hashValue %= hashTableSize;
   return hashValue;
+}
+
+void Library::printBooks(treeNode *node, bookNode *title){
+  treeNode t;
+  if(node == 0){
+    //base case
+    return;
+  }
+  if(node->leftChild != NULL){
+    printBooks(node->leftChild, title);
+  }
+  cout << "Books starting with letter: " << node->titleChar << endl;
+  for(int i = 0; i < hashTableSize; i++){
+    if(t.hashTable[i] != NULL){
+      bookNode* curr = t.hashTable[i];
+      while(curr != NULL){
+        cout << curr->title;
+        curr = curr->next;
+      }
+      cout << endl;
+    }
+  }
+
+  if(node->rightChild != NULL){
+    printBooks(node->rightChild, title);
+  }
 }
 
 void Library::printHashByAuthor(string author, treeNode* t){
@@ -225,7 +263,7 @@ void Library::printCheckedInHelper(treeNode* currNode){
 }
 
 void Library::printCheckedIn(){
-  cout<<"All books currently checked in:"<<endl;
+  cout<<"All books currently avaliable to be checked out:"<<endl;
   printCheckedInHelper(root);
   return;
 }
