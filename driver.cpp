@@ -120,7 +120,8 @@ int main(){
               break;
 
               case 3:
-                cout << endl << "Option 3" << endl;
+                cout << endl << "Load in a file of books" << endl;
+                
               break;
 
               case 4:
