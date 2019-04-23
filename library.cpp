@@ -99,6 +99,32 @@ void Library::addBook(string title,string author){
   }
 }
 
+void Library::deleteBook(string title){
+  cout << "Begin delete" << endl;
+  char titleChar = title[0];
+  treeNode* foundNode = searchTree(root, titleChar);
+  cout << "Found tree node" << endl;
+  if(foundNode != nullptr){
+    foundNode -> numBooks--;
+    cout << "Begin loop through hash table" << endl;
+    //for(int i = 0; i < hashTableSize; i++){
+    unsigned int i = hash(title, hashTableSize);
+    if(foundNode->hashTable[i]->title == title){
+        if(foundNode->hashTable[i]->count <= 1){
+          cout << "1 copy case" << endl;
+          foundNode->hashTable[i]==nullptr;
+        }
+        else{
+          cout << "More than 1 copy case" << endl;
+          foundNode->hashTable[i]->count = foundNode->hashTable[i]->count - 1;
+        }
+      //}
+    }
+
+  }
+  return;
+}
+
 treeNode* Library::searchTree(treeNode* curr, char titleChar){
    if(curr == nullptr) {
     return nullptr;
