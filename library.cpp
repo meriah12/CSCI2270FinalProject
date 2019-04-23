@@ -88,7 +88,6 @@ void Library::addBook(string title,string author){
     if(foundTreeNode->hashTable[index]==nullptr){ //if index is empty
       n->next=nullptr;
       foundTreeNode->hashTable[index]=n;
-      cout<<title<<" at index "<<index<<endl;
     }
     else{ //if index is not empty
       n->next=foundTreeNode->hashTable[index];
@@ -103,7 +102,6 @@ void Library::deleteBook(string title){
   treeNode* foundNode = searchTree(root, titleChar);
   foundNode->numBooks--;
   unsigned int index = hash(title,hashTableSize);
-  cout<<title<<" at index "<<index<<endl;
   if(foundNode->hashTable[index]!=nullptr){
     bookNode* temp = foundNode->hashTable[index];
     bookNode* prev = nullptr;
