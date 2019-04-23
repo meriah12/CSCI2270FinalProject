@@ -88,6 +88,7 @@ void Library::addBook(string title,string author){
     if(foundTreeNode->hashTable[index]==nullptr){ //if index is empty
       n->next=nullptr;
       foundTreeNode->hashTable[index]=n;
+      cout<<title<<" at index "<<index<<endl;
     }
     else{ //if index is not empty
       n->next=foundTreeNode->hashTable[index];
@@ -98,27 +99,29 @@ void Library::addBook(string title,string author){
 }
 
 void Library::deleteBook(string title){
-  cout << "Begin delete" << endl;
   char titleChar = title[0];
   treeNode* foundNode = searchTree(root, titleChar);
-  cout << "Found tree node" << endl;
-  if(foundNode != nullptr){
-    foundNode -> numBooks--;
-    cout << "Begin loop through hash table" << endl;
-    //for(int i = 0; i < hashTableSize; i++){
-    unsigned int i = hash(title, hashTableSize);
-    if(foundNode->hashTable[i]->title == title){
-        if(foundNode->hashTable[i]->count <= 1){
-          cout << "1 copy case" << endl;
-          foundNode->hashTable[i]==nullptr;
+  foundNode->numBooks--;
+  unsigned int index = hash(title,hashTableSize);
+  cout<<title<<" at index "<<index<<endl;
+  if(foundNode->hashTable[index]!=nullptr){
+    bookNode* temp = foundNode->hashTable[index];
+    bookNode* prev = nullptr;
+    while(temp!=nullptr){
+      if(temp->title==title){
+        if(prev==nullptr){
+          foundNode->hashTable[index]=nullptr;
+          return;
         }
         else{
-          cout << "More than 1 copy case" << endl;
-          foundNode->hashTable[i]->count = foundNode->hashTable[i]->count - 1;
+          prev->next=temp->next;
+          delete temp;
+          return;
         }
-      //}
+      }
+      prev=temp;
+      temp=temp->next;
     }
-
   }
   return;
 }
@@ -191,17 +194,15 @@ unsigned int Library::hash(string title,int hashTableSize){
 void Library::printHashByAuthor(string author, treeNode* t){
   for(int i=0;i<hashTableSize-1;i++){
     if(t->hashTable[i]!=nullptr){
-      if(t->hashTable[i]->author==author){
-        cout << "-----" << endl;
-        cout<<t->hashTable[i]->title<<endl;
-        cout << "Copies available: " << t->hashTable[i]->inCount <<endl;
-      }
-      while(t->hashTable[i]->next!=nullptr){
-        if(t->hashTable[i]->author==author){
-          cout << "-----" << endl;
-          cout<<t->hashTable[i]->title<<endl;
-          cout << "Copies available: " << t->hashTable[i]->inCount << endl;
+      bookNode* temp = t->hashTable[i];
+      while(temp!=nullptr){
+        if(temp->author==author){
+          if(temp->inCount>1)
+            cout << " (" << temp->inCount <<" copies avaliable)"<<endl;
+          else
+            cout<<temp->title<<endl;
         }
+        temp=temp->next;
       }
     }
   }
@@ -233,15 +234,15 @@ void Library::printByAuthor(string author){
 void Library::printHashCheckedIn(treeNode* t){
   for(int i=0;i<hashTableSize-1;i++){
     if(t->hashTable[i]!=nullptr){
-      if(t->hashTable[i]->inCount > 0){
-        cout<<t->hashTable[i]->title<<endl;
-        cout << "Copies available: " << t->hashTable[i]->inCount <<endl;
-      }
-      while(t->hashTable[i]->next!=nullptr){
-        if(t->hashTable[i]->inCount > 0){
-          cout<<t->hashTable[i]->title<<endl;
-          cout << "Copies available: " << t->hashTable[i]->inCount <<endl;
+      bookNode* temp = t->hashTable[i];
+      while(temp!=nullptr){
+        if(temp->inCount > 0){
+          if(temp->inCount>1)
+            cout << " (" << temp->inCount <<" copies avaliable)"<<endl;
+          else
+            cout<<temp->title<<endl;
         }
+        temp=temp->next;
       }
     }
   }
@@ -269,15 +270,15 @@ void Library::printCheckedIn(){
 void Library::printHashCheckedOut(treeNode* t){
   for(int i=0;i<hashTableSize-1;i++){
     if(t->hashTable[i]!=nullptr){
-      if(t->hashTable[i]->inCount < t->hashTable[i]->count ){
-        cout<<t->hashTable[i]->title<<endl;
-        cout << "Copies Checked Out: " << t->hashTable[i]->count - t->hashTable[i]->inCount <<endl;
-      }
-      while(t->hashTable[i]->next!=nullptr){
-        if(t->hashTable[i] -> inCount < t->hashTable[i] -> count){
-          cout<<t->hashTable[i]->title<<endl;
-          cout << "Copies Checked Out: " << t->hashTable[i]->count - t->hashTable[i]->inCount <<endl;
+      bookNode* temp = t->hashTable[i];
+      while(temp!=nullptr){
+        if(temp->inCount<temp->count){
+          if((temp->count-temp->inCount)>1)
+            cout <<temp->title << " (" << temp->count-temp->inCount <<" copies checked out)"<<endl;
+          else
+            cout<<temp->title<<endl;
         }
+        temp=temp->next;
       }
     }
   }
