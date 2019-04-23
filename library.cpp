@@ -245,12 +245,12 @@ void Library::printCheckedIn(){
 void Library::printHashCheckedOut(treeNode* t){
   for(int i=0;i<hashTableSize-1;i++){
     if(t->hashTable[i]!=nullptr){
-      if(t->hashTable[i]->checkedOut){
+      if(t->hashTable[i]->inCount < t->hashTable[i]->count ){
         cout<<t->hashTable[i]->title<<endl;
         cout << "Copies Checked Out: " << t->hashTable[i]->count - t->hashTable[i]->inCount <<endl;
       }
       while(t->hashTable[i]->next!=nullptr){
-        if(t->hashTable[i]->checkedOut){
+        if(t->hashTable[i] -> inCount < t->hashTable[i] -> count){
           cout<<t->hashTable[i]->title<<endl;
           cout << "Copies Checked Out: " << t->hashTable[i]->count - t->hashTable[i]->inCount <<endl;
         }
