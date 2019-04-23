@@ -180,7 +180,7 @@ int main(){
                     string title, author;
                     istringstream ss(line);
                     getline(ss, title, ',');
-                    getline(ss, author);
+                    getline(ss, author, ',');
                     cout << "Adding " << title << endl;
                     l.addBook(title, author);
                   }
