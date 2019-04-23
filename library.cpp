@@ -45,7 +45,7 @@ treeNode* Library::createTree(){
 void Library::checkOut(string title){
   bookNode* found = search(title);
   if(found!=nullptr&&found->inCount > 0){
-    found->checkedOut=true;
+    //found->checkedOut=true;
     found -> inCount = found -> inCount - 1;
   }
   else if(found!=nullptr&&found->inCount == 0)
@@ -58,7 +58,7 @@ void Library::checkOut(string title){
 void Library::checkIn(string title){
   bookNode* found = search(title);
   if(found!=nullptr && found -> inCount < found -> count){
-    found->checkedOut=false;
+    //found->checkedOut=false;
     found -> inCount = found -> inCount + 1;
   }
   else if(found!=nullptr&&found->inCount == found -> count)
@@ -71,7 +71,7 @@ bookNode* Library::createBook(string title,string author){
   bookNode* n = new bookNode;
   n->title=title;
   n->author=author;
-  n->checkedOut=false;
+  //n->checkedOut=false;
   n->next=nullptr;
   n->count = 1;
   n -> inCount = 1;
