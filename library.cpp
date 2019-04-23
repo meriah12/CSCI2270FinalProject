@@ -66,6 +66,7 @@ void Library::checkIn(string title){
   else
     cout<<title<<" can't be checked in because it's not in the inventory.";
 }
+
 bookNode* Library::createBook(string title,string author){
   bookNode* n = new bookNode;
   n->title=title;
@@ -167,11 +168,15 @@ void Library::printHashByAuthor(string author, treeNode* t){
   for(int i=0;i<hashTableSize-1;i++){
     if(t->hashTable[i]!=nullptr){
       if(t->hashTable[i]->author==author){
+        cout << "-----" << endl;
         cout<<t->hashTable[i]->title<<endl;
+        cout << "Copies available: " << t->hashTable[i]->inCount <<endl;
       }
       while(t->hashTable[i]->next!=nullptr){
         if(t->hashTable[i]->author==author){
+          cout << "-----" << endl;
           cout<<t->hashTable[i]->title<<endl;
+          cout << "Copies available: " << t->hashTable[i]->inCount << endl;
         }
       }
     }
