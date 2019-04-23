@@ -9,7 +9,7 @@ using namespace std;
 struct bookNode{ //define node for each spot in hash table
   string title; //book title
   string author; //book author
-  bool checkedOut; //true if book is checked out yet, false if in stock
+  //bool checkedOut; //true if book is checked out yet, false if in stock
   bookNode* next; //pointer to next node for open addressing
   int count; //Counts how many of the same book are in the library
   int inCount; //Keeps track of the number of the same book not checked out in library
