@@ -1,6 +1,7 @@
 #include <iostream>
 #include <string>
 #include <fstream>
+#include <sstream>
 using namespace std;
 #include "library.cpp"
 
@@ -169,7 +170,15 @@ int main(){
                 ifstream file;
                 file.open(filename);
                 if(file.is_open()){
-                  
+                  string line;
+                  while(getline(file, line)){
+                    string title, author;
+                    istringstream ss(line);
+                    getline(ss, title, ',');
+                    getline(ss, author);
+                    cout << "Adding " << title << endl;
+                    l.addBook(title, author);
+                  }
                 }
                 else{
                   cout << "Could not load file!" << endl;
