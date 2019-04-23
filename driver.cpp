@@ -17,7 +17,7 @@ int main(){
     cout << "----------MENU----------" << endl;
     cout << "1) Check Out a Book" << endl;
     cout << "2) Return a Book" << endl;
-    cout << "3) Search For a Book" << endl;
+    cout << "3) Search For Books by Title" << endl;
     cout << "4) Search For Books by Author" << endl;
     cout << "5) Go to Staff Menu" << endl;
     cout << "6) Exit Program" << endl;
@@ -163,7 +163,7 @@ int main(){
                 cout << endl << "Enter title of the book to be removed: ";
                 string title;
                 getline(cin, title);
-                //deleteBook(title);
+                l.deleteBook(title);
               }
               break;
 
