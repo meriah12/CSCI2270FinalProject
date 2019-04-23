@@ -1,5 +1,6 @@
 #include <iostream>
 #include <string>
+#include <fstream>
 using namespace std;
 #include "library.cpp"
 
@@ -33,6 +34,7 @@ int main(){
         getline (cin, title);
         cout << endl;
         l.checkOut(title);
+        cout<< endl;
         //SEARCH FOR THE TITLE OF THE BOOK
         //IF BOOK IS FOUND, CALL THE CHECK OUT BOOK FUNCTION
         //IF THE BOOK IS NOT FOUND, PRINT AN ERROR MESSAGE AND RETURN TO MAIN MENU
@@ -49,6 +51,7 @@ int main(){
         getline(cin, title);
         cout << endl;
         l.checkIn(title);
+        cout << endl;
         //SEARCH FOR THE TITLE OF THE BOOK
         //IF BOOK IS FOUND, CALL THE RETURN BOOK FUNCTION
         //IF THE BOOK IS NOT FOUND, PRINT AN ERROR MESSAGE AND RETURN TO MAIN MENU
@@ -73,12 +76,19 @@ int main(){
 
         //Call the search function, if the book is not found, display that the book does not exist in the library
         //If the book is found, display the information of the book and whether it is checked out or not
-
+        cout << endl;
       }
       break;
 
       case 4:
-
+      {
+        cout << endl << "BOOK SEARCH BY AUTHOR" << endl;
+        cout << "Enter an author: ";
+        string author;
+        getline(cin, author);
+        l.printByAuthor(author);
+        cout << endl;
+      }
       break;
       //Staff Menu Option
       //The staff menu is password protected and allows a staff member to access the other functions and code that would not be available to the public
@@ -128,7 +138,7 @@ int main(){
 
                 else{
                   cout << title << " already exists in database. Adding 1 to book count" << endl;
-                  check-> count = check -> count + 1;
+                  check -> count = check -> count + 1;
                   check -> inCount = check -> inCount + 1;
                   cout << "-------------------------------" << endl;
                   cout << "Book count for " << title << ":" << endl;
@@ -156,16 +166,29 @@ int main(){
                 cout << "Enter filename: ";
                 string filename;
                 getline(cin, filename);
-
+                ifstream file;
+                file.open(filename);
+                if(file.is_open()){
+                  
+                }
+                else{
+                  cout << "Could not load file!" << endl;
+                }
               }
               break;
 
               case 4:{
-                cout << endl << "Print By Author" << endl;
-                cout<<endl<<"Enter the author to print books by: ";
-                string author;
-                getline(cin,author);
-                l.printByAuthor(author);
+                cout << endl << "Get book information" << endl;
+                cout << "Enter book title: ";
+                string title;
+                getline(cin,title);
+                bookNode* book = l.search(title);
+                cout << "Results for " << book -> title << ":" << endl;
+                cout << "Author: " << book -> author << endl;
+                cout << "Total Copies: " << book -> count << endl;
+                cout << "Copies Available: " << book -> inCount << endl;
+                cout << "Copies Checked Out: " << (book ->count) - (book ->inCount) << endl;
+                cout << endl;
               }
               break;
 
