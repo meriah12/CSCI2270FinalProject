@@ -114,8 +114,20 @@ void Library::addBook(string title,string author){
       foundTreeNode->hashTable[index]=n;
     }
     else{ //if index is not empty
-      n->next=foundTreeNode->hashTable[index];
-      foundTreeNode->hashTable[index]=n;
+      bookNode* temp = foundTreeNode->hashTable[index];
+      bool duplicate = false;
+      while(temp != nullptr){
+        if(temp->title == title){
+          temp->count++;
+          temp->inCount++;
+          duplicate = true;
+        }
+        temp = temp -> next;
+      }
+      if(!duplicate){
+        n->next=foundTreeNode->hashTable[index];
+        foundTreeNode->hashTable[index]=n;
+      }
     }
   return;
   }
