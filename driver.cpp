@@ -121,11 +121,6 @@ int main(){
                 cout << "Enter the title of the new book: ";
                 string title;
                 char titleChar = title[0];
-                /*
-                if (titleChar == 'X' || titleChar == 'F' || titleChar == 'Q'){
-                  l.createTreeNode(titleChar);
-                }
-                */
                 getline(cin, title);
                 cout<< "Enter the author of the new book: ";
                 string author;
