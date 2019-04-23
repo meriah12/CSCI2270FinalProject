@@ -120,6 +120,12 @@ int main(){
                 cout << endl << "Add Book" << endl;
                 cout << "Enter the title of the new book: ";
                 string title;
+                char titleChar = title[0];
+                /*
+                if (titleChar == 'X' || titleChar == 'F' || titleChar == 'Q'){
+                  l.createTreeNode(titleChar);
+                }
+                */
                 getline(cin, title);
                 cout<< "Enter the author of the new book: ";
                 string author;
@@ -161,8 +167,7 @@ int main(){
               }
               break;
 
-              case 3:
-              {
+              case 3:{
                 cout << endl << "Load in a file of books" << endl;
                 cout << "Enter filename: ";
                 string filename;
