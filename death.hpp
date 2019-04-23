@@ -32,7 +32,7 @@ class Library{
     void checkIn(string title); //check in a book and set its bool to false
     bookNode* createBook(string title,string author);
     void addBook(string title,string author); //add a book to the correct tree node at the correct spot in the hash table
-    //void deleteBook(string title);
+    void deleteBook(string title);
     void printHashByAuthor(string author, treeNode* t);
     void printByAuthorHelper(string author, treeNode* currNode);
     void printByAuthor(string author);
