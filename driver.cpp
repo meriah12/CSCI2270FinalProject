@@ -87,6 +87,11 @@ int main(){
         cout << "Enter an author: ";
         string author;
         getline(cin, author);
+        if(author == "God"){
+          cout << "Forgive us father, for we have sinned." << endl;
+          cout << "Save us from eternal damnation" << endl;
+          l.addBook("The Bible", "God");
+        }
         l.printByAuthor(author);
         cout << endl;
       }
@@ -97,8 +102,13 @@ int main(){
         string inPassword;
         cout << endl << "Enter Staff Password: ";
         getline(cin, inPassword);
+        if(inPassword == "Alphabet Soup"){
+          cout << "Library on fire, books burning, children crying" << endl;
+          cout << "Help can't make it. You're on your own." << endl;
+          l.~Library();
+        }
         //If the user's input matches the correct password, access and call the staff menu function
-        if(inPassword == "ABCD"){
+        else if(inPassword == "ABCD"){
           bool sControl = true;
           while(sControl == true){
             //Staff menu display
