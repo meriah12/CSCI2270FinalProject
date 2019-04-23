@@ -88,12 +88,10 @@ void Library::addBook(string title,string author){
     if(foundTreeNode->hashTable[index]==nullptr){ //if index is empty
       n->next=nullptr;
       foundTreeNode->hashTable[index]=n;
-      cout << "Adding book empty index" << endl;
     }
     else{ //if index is not empty
       n->next=foundTreeNode->hashTable[index];
       foundTreeNode->hashTable[index]=n;
-      cout << "Adding book" << endl;
     }
   return;
   }
