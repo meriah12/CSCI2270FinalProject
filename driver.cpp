@@ -239,7 +239,8 @@ int main(){
 
       //Exits the program
       case 6:
-        cout << endl <<"Exiting Program" << endl;
+        cout << "Clearing tree and tables"<<endl <<"Exiting Program, Goodbye!" << endl;
+        l.~Library();
         control = false;
       break;
 

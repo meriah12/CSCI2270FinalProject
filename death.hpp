@@ -26,6 +26,8 @@ class Library{
     //bookNode** hashTable;
     void printBooks(treeNode *node, bookNode *title);
     treeNode* createTree();
+    void deleteHash(treeNode* t);
+    void deleteTree(treeNode* currNode);
     Library(int hashTableSize); //constructor creates tree with 26 nodes and 26 hash tables
     ~Library(); //destructor
     void checkOut(string title); //check out a book and set its bool to true

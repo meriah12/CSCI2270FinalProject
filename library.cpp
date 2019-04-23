@@ -7,10 +7,34 @@ using namespace std;
 Library::Library(int hashTableSize){
   this->hashTableSize=hashTableSize;
   this->root=createTree();
+  return;
+}
+
+void Library::deleteHash(treeNode* t){
+  for(int i=0;i<hashTableSize-1;i++){
+    bookNode* current = t->hashTable[i];
+    bookNode* next;
+    while(current!=nullptr){
+      next=current->next;
+      delete current;
+      current=next;
+    }
+  }
+  return;
+}
+
+void Library::deleteTree(treeNode* currNode){
+  if(currNode==nullptr)
+    return;
+  deleteTree(currNode->leftChild);
+  deleteTree(currNode->rightChild);
+  deleteHash(currNode);
+  delete currNode;
 }
 
 Library::~Library(){
-
+  deleteTree(root);
+  root=nullptr;
 }
 
 treeNode* Library::createTree(){
@@ -173,7 +197,7 @@ treeNode* Library::createTreeNode(char titleChar){
   t->leftChild=nullptr;
   t->numBooks=0;
   t->hashTable=new bookNode*[hashTableSize];
-  for(int i=0;i<hashTableSize;i++){
+  for(int i=0;i<hashTableSize-1;i++){
     t->hashTable[i] = nullptr;
   }
   return t;
